@@ -51,7 +51,10 @@
   });
   var Content = React.createClass({
     render:function(){
-      return (<p>{this.props.contentText}</p>);
+      var texts=this.props.contentText;
+      return (
+        <div>{texts.map(function(text){return <p>{text}</p>})}</div>
+        );
     }
   });
   var Section = React.createClass({
