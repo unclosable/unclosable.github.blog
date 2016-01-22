@@ -1,1 +1,4 @@
-console.log('This would be the main JS file.');
+ReactDOM.render(
+	<h1>Hello, world!</h1>,
+	document.getElementById('reactTest')
+);
