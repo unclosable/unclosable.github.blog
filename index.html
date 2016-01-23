@@ -11,7 +11,6 @@
   <script src="javascripts/React/react-dom.min.js"></script>
   <script src="javascripts/React/browser.min.js"></script>
   <script src="javascripts/jquery-1.8.2-min.js"></script>
-  <script type="text/babel" src="javascripts/myComponent.js"></script>
   <title>Unclosable.GitHub.io</title>
 </head>
 
@@ -29,61 +28,12 @@
   <!-- MAIN CONTENT -->
   <div id="main_content_wrap" class="outer">
   </div>
-  <script type="text/babel">
-  var ClickTitleChild=React.createClass({
-    render:function(){
-      return (<span className="octicon octicon-link">{this.props.theHrefText}</span>);
-    }
-  });
-  var ClickTitle = React.createClass({
-    render:function(){
-      return (<a id="unclosablegithubio" className="anchor" href={this.props.thehref} aria-hidden="true">
-        <ClickTitleChild theHrefText={this.props.theHrefText}/></a>);
-    }
-  });
-  var Title = React.createClass({
-    render:function(){
-      return (<h1>
-        <ClickTitle theHrefText={this.props.theHrefText} thehref={this.props.thehref}/>
-        {this.props.titlsText}
-        </h1>);
-    }
-  });
-  var Content = React.createClass({
-    render:function(){
-      var texts=this.props.contentText;
-      return (
-        <div>{texts.map(function(text){return <p>{text}</p>})}</div>
-        );
-    }
-  });
-  var Section = React.createClass({
-    render:function() {
-      return (<section id="main_content" className="inner">
-        <Title  theHrefText={this.props.theHrefText} thehref={this.props.thehref} titlsText={this.props.titlsText}/>
-        <Content contentText={this.props.contentText}/>
-        </section>);
-    }
-  });
-    $.get("data/content.json", function(result) {
-    ReactDOM.render(
-    <div>
-    {
-      result.map(function (r) {
-        return <Section theHrefText={r.theHrefText} thehref={r.thehref} titlsText={r.titlsText} contentText={r.contentText} />
-      })
-    }</div>,document.getElementById('main_content_wrap')
-    );
-    });
-  </script>
-    <!-- FOOTER  -->
+  <script type="text/babel" src="javascripts/myComponent.js"></script>
+  <!-- FOOTER  -->
   <div id="footer_wrap" class="outer">
     <footer class="inner">
       <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
     </footer>
   </div>
-
-    
-
-  </body>
-  </html>
+</body>
+</html>
