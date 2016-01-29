@@ -1,7 +1,6 @@
 var Timer = React.createClass({
   //获取初始化状态
   getInitialState: function() {
-    console.log('初始化');
     return this.getTimeNow();
   },
   //一个操作函数
@@ -10,13 +9,11 @@ var Timer = React.createClass({
   },
   //组件安装
   componentDidMount: function() {
-    console.log('安装函数');
     //setInterval() 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式
     this.interval = setInterval(this.tick, 1000);
   },
   //组件卸载
   componentWillUnmount: function() {
-    console.log('卸载函数');
     clearInterval(this.interval);
   },
   getTimeNow:function(){
@@ -36,5 +33,5 @@ var Timer = React.createClass({
       );
   }
 });
-
-ReactDOM.render(<Timer />, document.getElementById('forkme_banner'));
+var forkme_banner=$("#forkme_banner");
+ReactDOM.render(<Timer />, forkme_banner[0]);

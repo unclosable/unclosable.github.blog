@@ -40,6 +40,6 @@ $.get("data/content.json", function(result) {
       result.map(function (r) {
         return <Section theHrefText={r.theHrefText} thehref={r.thehref} titlsText={r.titlsText} contentText={r.contentText} />
       })
-    }</div>,document.getElementById('main_content_wrap')
+    }</div>,$("#main_content_wrap")[0]
     );
 });
