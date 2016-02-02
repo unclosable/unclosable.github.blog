@@ -52,6 +52,5 @@ var TodoApp = React.createClass({
 });
 
     $.get("data/message.json", function(result) {
-      console.log(result);
         ReactDOM.render(<TodoApp items={result}/>, $("#mountNode")[0]);
     });
