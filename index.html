@@ -8,10 +8,12 @@
 
   <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon" />
   <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-  <script src="javascripts/React/react.min.js"></script>
-  <script src="javascripts/React/react-dom.min.js"></script>
-  <script src="javascripts/React/browser.min.js"></script>
-  <script src="javascripts/jquery-1.8.2-min.js"></script>
+  <script src="javascripts/lib/React/react.js"></script>
+  <script src="javascripts/lib/React/react-dom.min.js"></script>
+  <script src="javascripts/lib/React/browser.min.js"></script>
+  <script src="javascripts/lib/jquery-1.8.2-min.js"></script>
+  <script src="javascripts/lib/socket.io.js"></script>
+  <script src="javascripts/action.js"></script>
   <title>Unclosable.GitHub.io</title>
 </head>
 
@@ -21,7 +23,7 @@
   <div id="header_wrap" class="outer">
     <header class="inner">
       <a id="forkme_banner" href="https://github.com/unclosable">View on GitHub</a>
-      <script type="text/babel" src="javascripts/timer.jsx"></script>
+      <script type="text/babel" src="javascripts/jsx/timer.jsx"></script>
       <h1 id="project_title">Unclosable.GitHub.io</h1>
       <h2 id="project_tagline">"如果觉得不错,请立刻发offer"——by unclosable</h2>
     </header>
@@ -30,13 +32,13 @@
   <!-- MAIN CONTENT -->
   <div id="main_content_wrap" class="outer">
   </div>
-  <script type="text/babel" src="javascripts/myComponent.jsx"></script>
+  <script type="text/babel" src="javascripts/jsx/myComponent.jsx"></script>
 
 
   <div id="plug_content_wrap" class="outer">
     <div id="mountNode" class="inner"></div> 
   </div>
-  <script type="text/babel" src="javascripts/todoApp.jsx"></script>
+  <script type="text/babel" src="javascripts/jsx/todoApp.jsx"></script>
   <!-- FOOTER  -->
   <div id="footer_wrap" class="outer">
     <footer class="inner">

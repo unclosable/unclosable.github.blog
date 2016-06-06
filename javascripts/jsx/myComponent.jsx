@@ -38,7 +38,7 @@ $.get("data/content.json", function(result) {
     <div>
     {
       result.map(function (r) {
-        return <Section key={r.theHrefText} theHrefText={r.theHrefText} thehref={r.thehref} titlsText={r.titlsText} contentText={r.contentText} />
+        return <Section theHrefText={r.theHrefText} thehref={r.thehref} titlsText={r.titlsText} contentText={r.contentText} />
       })
     }</div>,$("#main_content_wrap")[0]
     );
