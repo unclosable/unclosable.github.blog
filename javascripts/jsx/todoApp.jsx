@@ -1,7 +1,7 @@
 var TodoList = React.createClass({
   render: function() {
-    var createItem = function(item) {
-      return  <li key={item.id} className="message">
+    var createItem = function(item,key) {
+      return  <li key={key} className="message">
                 <p className="itemTitle"> {item.editor} <font className="said">said</font></p>
                 <p className="itemContent">{item.content}</p>
               </li>;
@@ -11,7 +11,7 @@ var TodoList = React.createClass({
 });
 var TodoApp = React.createClass({
   getInitialState: function() {
-    return {items: this.props.items, editor: '',content:''};
+    return {items: this.props.items, editor: '',content:'',messageSender:this.props.messageSender};
   },
   onEditorChange: function(e) {
     this.setState({editor:e.target.value});
@@ -19,16 +19,18 @@ var TodoApp = React.createClass({
   onContentChange:function(e){
     this.setState({content:e.target.value});
   },
-  // addNewMessage:function(data){
-  //   var nextItems = this.state.items.concat([{editor: data.editor,content:data.content, id: Date.now()}]);
-  //   var nextText = '';
-  //   this.setState({items: nextItems, editor: nextText,content:nextText});
-  // },
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var nextItems = this.state.items.concat([{editor: this.state.editor,content:this.state.content, id: Date.now()}]);
+  addNewMessage:function(data){
+    var nextItems = this.state.items.concat([{editor: data.editor,content:data.content}]);
     var nextText = '';
     this.setState({items: nextItems, editor: nextText,content:nextText});
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var data={editor: this.state.editor,content:this.state.content};
+    this.state.messageSender(data);
+    var nextItems = this.state.items.concat([{editor: this.state.editor,content:this.state.content}]);
+    var nextText = '';
+    this.setState({items: nextItems, editor: nextText,content:nextText,messageSender:this.state.messageSender});
   },
   render: function() {
     return (
@@ -37,6 +39,7 @@ var TodoApp = React.createClass({
       <TodoList items={this.state.items} />
       <form className="messageForm" >
         <table>
+        <tbody>
           <tr>
             <td className="firstInput">留言ID:</td>
             <td><input onChange={this.onEditorChange} value={this.state.editor} className="titleInput"/></td>
@@ -48,6 +51,7 @@ var TodoApp = React.createClass({
           <tr>
             <td colSpan="2" className="buttonTd"><button onClick={this.handleSubmit}>{'添加评论'}</button></td>
           </tr>
+          </tbody>
         </table>
       </form>
       </div>
@@ -56,14 +60,16 @@ var TodoApp = React.createClass({
 });
 
     $.get("data/message.json", function(result) {
-        ReactDOM.render(<TodoApp items={result}/>, $("#mountNode")[0]);
-        // var addMessage=function(data){
-        // if(data.editor&&data.content){
-        //     TodoApp.addNewMessage({
-        //         editor:data.editor,
-        //         content:data.content
-        //     });
-        //   }
-        // }
-        // client.addMessageActor(addMessage);
+        var messageSender=client.messageSender;
+        var todoApp=ReactDOM.render(<TodoApp items={result} messageSender={messageSender}/>, $("#mountNode")[0]);
+        //注册收到信息的事件
+        var addMessage=function(data){
+        if(data.editor&&data.content){
+            todoApp.addNewMessage({
+                editor:data.editor,
+                content:data.content
+            });
+          }
+        }
+        client.addMessageActor(addMessage);
     });

@@ -1,7 +1,7 @@
 var client = (function(){
-	var messageAction=[],disconnectAction=[];
+	var messageAction=[],disconnectAction=[],socket;
 	var init=function(){
-		var socket = io("http://139.129.12.185:5566");
+		socket = io("http://139.129.12.185:5566");
 		socket.on('connect', function(){
 			console.log('connect success');
 		});
@@ -26,6 +26,12 @@ var client = (function(){
 			}
 		};
 	}
+	var messageSender=function(message){
+		if(socket){
+			console.log('message');
+			socket.emit('message',message);
+		}
+	}
 	init();
 	return{
 		addMessageActor:function(actor){
@@ -33,6 +39,7 @@ var client = (function(){
 		},
 		addDisconnectActor:function(actor){
 			addActor(actor,disconnectAction)();
-		}
+		},
+		messageSender:messageSender
 	}
 })();

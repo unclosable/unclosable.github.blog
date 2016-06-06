@@ -21,7 +21,7 @@ var Content = React.createClass({
   render:function(){
     var texts=this.props.contentText;
     return (
-      <div>{texts.map(function(text){return <p>{text}</p>})}</div>
+      <div>{texts.map(function(text,index){return(<p key={index} >{text}</p>); })}</div>
       );
   }
 });
@@ -37,8 +37,8 @@ $.get("data/content.json", function(result) {
   ReactDOM.render(
     <div>
     {
-      result.map(function (r) {
-        return <Section theHrefText={r.theHrefText} thehref={r.thehref} titlsText={r.titlsText} contentText={r.contentText} />
+      result.map(function (r,s) {
+        return <Section key={s} theHrefText={r.theHrefText} thehref={r.thehref} titlsText={r.titlsText} contentText={r.contentText} />
       })
     }</div>,$("#main_content_wrap")[0]
     );
