@@ -28,7 +28,6 @@ var client = (function(){
 	}
 	var messageSender=function(message){
 		if(socket){
-			console.log('message');
 			socket.emit('message',message);
 		}
 	}
