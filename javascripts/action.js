@@ -3,7 +3,7 @@ var client = (function() {
         disconnectAction = [],
         socket;
     var init = function() {
-        socket = io("http://139.129.12.185:5566");
+        socket = io("http://43.241.234.241:5566");
         socket.on('connect', function() {
             console.log('connect success');
         });
