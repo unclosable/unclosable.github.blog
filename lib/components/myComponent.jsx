@@ -1,3 +1,6 @@
+var $ = require('jquery');
+var React = require('react');
+
 var ClickTitleChild = React.createClass({
     render: function() {
         return (
