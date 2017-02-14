@@ -1,5 +1,5 @@
 module.exports = {
-    entry: './lib/index',
+    entry: './lib/index.jsx',
     output: {
         filename: 'build/browser-bundle.js'
     },
