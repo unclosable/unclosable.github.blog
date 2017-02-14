@@ -19866,6 +19866,7 @@
 	
 	var $ = __webpack_require__(161);
 	var React = __webpack_require__(1);
+	var ReactDOM = __webpack_require__(158);
 	
 	var ClickTitleChild = React.createClass({
 	    displayName: 'ClickTitleChild',
@@ -29767,6 +29768,7 @@
 	
 	var $ = __webpack_require__(161);
 	var React = __webpack_require__(1);
+	var client = __webpack_require__(164);
 	
 	var TodoList = React.createClass({
 	    displayName: 'TodoList',
@@ -29912,6 +29914,61 @@
 	    };
 	    client.addMessageActor(addMessage);
 	});
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	var client = function () {
+	    var messageAction = [],
+	        disconnectAction = [],
+	        socket;
+	    var init = function init() {
+	        socket = io("http://43.241.234.241:5566");
+	        socket.on('connect', function () {
+	            console.log('connect success');
+	        });
+	        socket.on('message', function (data) {
+	            for (var i = messageAction.length - 1; i >= 0; i--) {
+	                messageAction[i](data);
+	            };
+	        });
+	        socket.on('disconnect', function (data) {
+	            for (var i = disconnectAction.length - 1; i >= 0; i--) {
+	                disconnectAction[i](data);
+	            };
+	        });
+	    };
+	    var isFunction = function isFunction(test) {
+	        return typeof test == 'function';
+	    };
+	    var addActor = function addActor(actor, actorList) {
+	        if (isFunction(actor) && actorList) {
+	            return function () {
+	                actorList.push(actor);
+	            };
+	        };
+	    };
+	    var messageSender = function messageSender(message) {
+	        if (socket) {
+	            socket.emit('message', message);
+	        }
+	    };
+	    init();
+	    return {
+	        addMessageActor: function addMessageActor(actor) {
+	            addActor(actor, messageAction)();
+	        },
+	        addDisconnectActor: function addDisconnectActor(actor) {
+	            addActor(actor, disconnectAction)();
+	        },
+	        messageSender: messageSender
+	    };
+	}();
+	
+	module.exports = client;
 
 /***/ }
 /******/ ]);

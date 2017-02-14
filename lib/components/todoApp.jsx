@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var React = require('react');
+var client = require('./client.js');
 
 var TodoList = React.createClass({
     render: function() {
