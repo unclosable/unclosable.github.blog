@@ -82,15 +82,13 @@ var TodoApp = React.createClass({
     }
 });
 
-$.get("data/message.json", function(result) {
-    var messageSender = client.messageSender;
-    var todoApp = ReactDOM.render(
-        <TodoApp items={result} messageSender={messageSender}/>, $("#mountNode")[0]);
-    //注册收到信息的事件
-    var addMessage = function(data) {
-        if (data.editor && data.content) {
-            todoApp.addNewMessage({editor: data.editor, content: data.content});
-        }
+var messageSender = client.messageSender;
+var todoApp = ReactDOM.render(
+    <TodoApp items={[]} messageSender={messageSender}/>, $("#mountNode")[0]);
+//注册收到信息的事件
+var addMessage = function(data) {
+    if (data.editor && data.content) {
+        todoApp.addNewMessage({editor: data.editor, content: data.content});
     }
-    client.addMessageActor(addMessage);
-});
+}
+client.addMessageActor(addMessage);
